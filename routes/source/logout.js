@@ -1,15 +1,30 @@
-let logout = require("../../database/users/tryLogout");
 
-module.exports = (req,res,next) =>{
+module.exports = (req, res, next) => {
 
 
-    console.log("\nUser trying to logout with Session ID = "+req.session.id);
+    if (res.locals.sessionType != "guest") {
+        console.log("\nUser trying to logout with Session ID = " + req.session.id);
 
-    if(res.locals.sessionType != "guest"){
-        if(logout(req.session.id) == "Failed"){
-            console.log("Logout failure");
-            next("Logout failure.");
-        }
+        let coll = req.db.collection('users');
+
+
+        coll.find({}).toArray((er, docs) => {
+            docs.forEach((entry) => {
+                if (entry.sessionid == req.session.id) {
+                    coll.updateOne(entry, {
+                        $set: {
+                            "username": entry.username,
+                            "password": entry.password,
+                            "account": entry.account,
+                            "sessionid": "none"
+                        }
+                    },
+                        (eerr, result) => {
+
+                        });
+                }
+            });
+        });
     }
     res.send(res.locals.sessionType);
 }

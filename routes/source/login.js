@@ -1,4 +1,6 @@
-let login = require("../../database/users/tryLogin");
+function login(username,password,sessionid){
+    
+}
 
 module.exports = (req,res,next) => {
     /*
@@ -6,15 +8,32 @@ module.exports = (req,res,next) => {
     if for each database entry username and password is correct
     save session id
     */
+
+
     console.log("\nUser trying to login with information: \nSession ID = "+req.session.id);
     console.log(req.body);
 
    if(res.locals.sessionType == "guest"){
-       if(login(req.body.username,req.body.password,req.session.id) == "Failed"){
-           console.log("Login failure");
-           next("Login failure.");
-       }
+       
+        let coll = req.db.collection('users');
+
+        
+        coll.find({}).toArray((er,docs)=>{
+            docs.forEach((entry)=>{
+                if(entry.username == req.body.username && entry.password == req.body.password){
+                    coll.updateOne(entry, {$set: {
+                        "username":entry.username,
+                        "password":entry.password,
+                        "account":entry.account,
+                        "sessionid":req.session.id
+                    }},
+                    (eerr,result)=>{
+                        console.log(eerr);
+                    });
+                }
+            });
+        });
+                
    }
    res.send(res.locals.sessionType);
 }
-                                         
