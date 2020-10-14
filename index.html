@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Funkit</title>
+</head>
+<body style="background-image: url('sources/board.jpg'); background-position:top; background-repeat:repeat-y; background-size: 100%;">
+    <nav class="navbar navbar-expand-md navbar-dark" style="background-color: rgb(179, 12, 101);">
+        <a href="index.html">
+            <img class="nav-link active" style="width:215px;height:50px" src="sources/logo.png">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">        
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" style="color:floralwhite; font-size: large; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" href="products.html">Termékek</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:floralwhite; font-size: large; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" href="orders.html">Rendelések</a>
+            </li>
+          </ul>
+          <div id = "log"/>         
+        </div>
+    </nav>
+    <div>
+        <div class="container-fluid" style="width:90%">
+            <div class="row justify-content-center"  ">
+                <div class="col-sm-12" style="margin-top:5%; margin-bottom:5%; border-radius: 20px;">
+                    <h1 style="color:black; font-size: 300%; text-align:center; ">Üdvözlet a Funkit weboldalán!</h1>
+                </div>
+            </div>
+            <div class="row justify-content-around" ">
+                <div class="col-md-6 col-sm-10" style="margin-top:5%;padding-bottom:2%; border-radius: 15px; background-color:white">
+                    <div class="container-fluid">
+                        <div class="row justify-content-start">
+                            <div class="col-sm-6 my-auto" >
+                                <img src="sources/blocks.jpg"/ style="max-width: 100%; max-height: 100%;">
+                        
+                            </div>
+                            <div class="col-sm-6">
+                                <br>
+                                These wooden blocks are soo good it's unbelievable. 
+                                Buy now, you should buy now.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-10 " style="margin-top:5%; padding-bottom:2%;border-radius: 15px; background-color:white">
+                    <br>
+                    Email: <a href="mailto:funkit@email.org">Funkit@email.org</a><br>
+                    Address: 4200 City, Generic Street 1.<br>
+                    Phone: +06201234567<br>
+
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:15px"></div>
+    </div>
+
+    <script>
+        getSession();
+        function getSession(){
+            var xhr = new XMLHttpRequest();
+            // we defined the xhr
+
+            xhr.onreadystatechange = function () {
+                if (this.readyState != 4) return;
+
+                if (this.status == 200) {
+                    var data = this.responseText;
+                    console.log(data);
+                    showLogin(data);
+
+                    // we get the returned data
+                }
+
+                // end of state change: it can be after some time (async)
+            };
+
+            xhr.open('GET', "getSession", true);
+            xhr.send();
+        }
+        function logout(){
+            let xhr = new XMLHttpRequest();
+                xhr.open("POST", "logout", true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.onreadystatechange = function () {
+                    if (this.readyState != 4) return;
+
+                    if (this.status == 200) {
+                        data = this.responseText;
+                        console.log(data);                    
+                        window.location.href = "index.html";
+                    }
+                };
+                xhr.send();
+        }
+        function showLogin(type){
+            if(type == "guest"){
+                document.getElementById("log").innerHTML+="<a href=\"login.html\" class=\"btn btn-success\" style=\"color:white\">Bejelentkezés</a>";
+            }
+            else{
+                document.getElementById("log").innerHTML+="<button onclick=\"logout()\" class=\"btn btn-danger\" ><a style=\"color:white\">Kijelentkezés</a></button>";
+            }
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>

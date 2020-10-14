@@ -1,0 +1,31 @@
+-login.html
+-order.html
+-add, edit, remove product
+
+
+products:
+    GET products - load product database
+
+    POST products/edit - auth session:
+        edit product
+
+    POST products/new - auth session:
+        add product
+
+    POST products/remove - auth session:
+        remove product
+
+orders:
+    GET orders/:user/allorders - auth session:
+        if failed redirect to login
+        else post orders
+
+    POST orders/:user/new - auth session:
+        add order to database
+        redirect to products
+
+    GET orders/:user/myorders - auth session:
+
+login:
+    POST login - auth session
+
