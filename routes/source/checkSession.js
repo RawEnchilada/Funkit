@@ -9,7 +9,6 @@ module.exports = (req,res,next) =>{
     console.log(Date.now()+"     type variable created");
     
 
-    //TODO this segment runs asynchronously resulting in unused queries.
     coll.find({}).toArray((er,docs)=>{
         docs.forEach((entry)=>{
             console.log(Date.now()+"     Checking session:\n       "+entry.username+"\n       "+entry.sessionid+"\n       "+req.session.id);
@@ -18,6 +17,8 @@ module.exports = (req,res,next) =>{
                 type = entry.account;
             }
         });
+        res.locals.sessionType = type;
+        next();
     });
     /*let query = { "sessionid":req.session.id};
     coll.findOne(query,(entry)=>{
@@ -26,7 +27,4 @@ module.exports = (req,res,next) =>{
         console.log(Date.now()+"     actual value: "+entry.account+"\n");
         type = entry.account;
     });*/
-
-    res.locals.sessionType = type;
-    next();
 }

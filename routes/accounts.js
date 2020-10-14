@@ -9,7 +9,6 @@ module.exports = (app) => {
 
     app.use(checkSession);
 
-    //this gets executed in the middle of checkSession()?????
     app.get("/getSession",(req,res,next) =>{
         console.log(Date.now()+"     get request:"+res.locals.sessionType);
         res.send(res.locals.sessionType);
