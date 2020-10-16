@@ -1,4 +1,4 @@
-
+//remove user's session id from database
 module.exports = (req, res, next) => {
 
 
