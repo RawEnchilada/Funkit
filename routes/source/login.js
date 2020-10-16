@@ -1,7 +1,5 @@
-function login(username,password,sessionid){
-    
-}
 
+//if given password and username match, store session id in database and log the user in
 module.exports = (req,res,next) => {
     /*
     if session is guest
