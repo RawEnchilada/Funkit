@@ -1,0 +1,35 @@
+<%- include("home",{selected: "Termékek"}) %>
+<body style="background-color:rgb(228, 210, 190)">
+    <%- include("navbar",{selected: "orders"}) %>
+    
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-sm-10">
+                <table class="table" style="background-color: white;">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="min-width:30%;"></th>
+                            <th scope="col" style="text-align: center;">Termék</th>
+                            <th scope="col" style="text-align: center;">Leírás</th>
+                            <th scope="col" style="text-align: center;">Ár</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="sources/blocks.jpg" style="max-width: 80%"/></td>
+                            <td style="vertical-align: middle;">Building Blocks</td>
+                            <td style="vertical-align: middle;">These are some very cool wooden blocks.</td>
+                            <td style="vertical-align: middle;">2000000ft</td>
+                        </tr>
+                        <tr>
+                            <td><img src="sources/tank.png" style="max-width: 80%"/></td>
+                            <td style="vertical-align: middle;">Pop Tanks</td>
+                            <td style="vertical-align: middle;">These are some very cool wooden tanks.</td>
+                            <td style="vertical-align: middle;">2000001ft</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<%- include("footer") %>

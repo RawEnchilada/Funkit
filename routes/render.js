@@ -1,5 +1,10 @@
-module.exports = (objRepo,viewName)=>{
-    return (req,res) => {
-        res.render(viewName, res.locals);
-    }
+module.exports = (app)=>{
+
+
+    app.use((req,res,next)=>{
+        res.render(res.locals.page,res.locals);
+        }
+    );
+
+
 }

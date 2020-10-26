@@ -1,0 +1,72 @@
+<%- include("header", {title:"Funkit - Bejelentkezés"}) %>
+<body style="background-image: url('sources/happy.jpg'); background-position:top; background-repeat: no-repeat;">
+    <%- include("navbar",{selected: "login"}) %>
+    <div class="container-fluid" style="width:40%;margin-top:5%;padding-top:20px; padding-bottom: 20px; border-radius: 15px; background-color:lightgray">
+        <div class="row justify-content-center">
+            <div class="col-sm-10" >
+                <form>
+                    <div class="form-group">
+                    <label for="username">Felhasználónév</label>
+                    <input type="text" class="form-control" id="username"">
+                    </div>
+                    <div class="form-group">
+                    <label for="password">Jelszó</label>
+                    <input type="password" class="form-control" id="password">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row justify-content-start" style="width:75%">
+            <div class="col-sm-2"> </div>
+            <div class="col-sm-auto" >
+                <button onclick="return login()" type="button" class="btn btn-success">Bejelentkezés</button>
+            </div>
+            <div class="col-sm-auto">
+                <button onclick="return register()" type="button" class="btn btn-primary">Regisztráció</button>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        function login(){
+            let data;
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "login.html/login", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function () {
+                if (this.readyState != 4) return;
+
+                if (this.status == 200) {
+                    data = this.responseText;
+                    console.log(data);                    
+                    window.location.href = "index.html";
+                }
+            };
+            xhr.send(JSON.stringify({
+                username: document.getElementById("username").value,
+                password: document.getElementById("password").value
+            }));
+            return data;
+            
+        }
+        function register(){
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "login.html/register", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function () {
+                if (this.readyState != 4) return;
+
+                if (this.status == 200) {
+                    data = this.responseText;
+                    console.log(data);                    
+                    window.location.href = "index.html";
+                }
+            };
+            xhr.send(JSON.stringify({
+                username: document.getElementById("username").value,
+                password: document.getElementById("password").value
+            }));
+            return data;
+        }
+    </script>
+<%- include("footer") %>

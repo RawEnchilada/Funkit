@@ -14,16 +14,18 @@ app.use(session({
         resave: false,
         saveUninitialized:true
     }),
-    express.static('static'),
+    //express.static('static'),
     parser
 );
 
 
 app.use(expressdb('mongodb://localhost:27017/local'));
 
+require("./routes/setLocals")(app);
 require("./routes/accounts")(app);
 require("./routes/products")(app);
 require("./routes/orders")(app);
+require("./routes/render")(app);
 
 
 let server = app.listen(4200, function () {
