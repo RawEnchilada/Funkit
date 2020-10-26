@@ -1,5 +1,5 @@
 
-
+//returns session type from database if logged in
 module.exports = (req,res,next) =>{
     //if session id belongs to user save to res.locals type: user, admin, guest
 

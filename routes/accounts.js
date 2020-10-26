@@ -3,9 +3,8 @@ let login = require("./source/login");
 let logout = require("./source/logout");
 let checkSession = require("./source/checkSession");
 
-module.exports = (app) => {
-
-    
+//Subscribe account handling middlewares
+module.exports = (app) => {    
 
     app.use(checkSession);
 
