@@ -6,6 +6,8 @@ let expressdb = require("express-mongo-db");
 let parser = bodyparser.json();
 let app = express();
 
+app.set("view engine","ejs");
+
 app.use(session({
         secret: "My Avalanche",
         resave: false,
