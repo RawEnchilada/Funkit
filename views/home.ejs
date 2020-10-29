@@ -8,7 +8,7 @@
                     
                 </div>
                 <div class="col-12 position-absolute" >
-                    <img class="rounded mx-auto d-block img-fluid" src="static/sources/cap.png" style="height: 160px;"/>
+                    <img class="rounded mx-auto d-block img-fluid" src="sources/cap.png" style="height: 160px;"/>
                 </div>
             </div>
 
@@ -17,7 +17,7 @@
                     <div class="container-fluid" style="background-color:rgb(255, 255, 255);height:100%" >
                         <div class="row justify-content-start">
                             <div class="col-lg-6 col-sm-4 my-auto" >
-                                <img src="static/sources/blocks.jpg"/ style="max-width: 100%; max-height: 100%;">
+                                <img src="sources/blocks.jpg"/ style="max-width: 100%; max-height: 100%;">
                         
                             </div>
                             <div class="col-lg-6  col-sm-8 my-auto" style="padding-bottom: 2%;margin-bottom: 2%;">
@@ -63,26 +63,9 @@
 
     <script>
         onResize();
-        getSession();
         window.onresize = onResize;
         function onResize(){
             document.getElementById("banner").innerHTML = "<div class=\"position-relative \" style=\" transform: translateX(-"+(2000-(screen.width/2))+"px);margin:auto; width: 0;height: 0;border-left: 2000px solid transparent;border-right: 2000px solid transparent;border-top: 160px solid rgb(179, 12, 101);\"></div>";
         }
-        
-        /*function logout(){
-            let xhr = new XMLHttpRequest();
-                xhr.open("POST", "logout", true);
-                xhr.setRequestHeader('Content-Type', 'application/json');
-                xhr.onreadystatechange = function () {
-                    if (this.readyState != 4) return;
-
-                    if (this.status == 200) {
-                        data = this.responseText;
-                        console.log(data);                    
-                        window.location.href = "/home";
-                    }
-                };
-                xhr.send();
-        }*/
     </script>
 <%- include("footer") %> 

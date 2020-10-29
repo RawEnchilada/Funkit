@@ -1,6 +1,6 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: rgb(179, 12, 101);">
     <a href="/home">
-        <img class="nav-link active" style="width:215px;height:50px" src="static/sources/logo.png">
+        <img class="nav-link active" style="width:215px;height:50px" src="sources/logo.png">
     </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,9 +28,9 @@
         </li>
       </ul>
       <% if(sessionType == "guest"){ %>
-      <a href="/login" class="btn btn-success" style="color:white">Bejelentkezés</a>      
+        <a href="/login" class="btn btn-success" style="color:white">Bejelentkezés</a>      
       <% } else if(sessionType == "user" || sessionType == "admin"){ %>
-        <button href="/login/logout" class="btn btn-danger" ><a style="color:white">Kijelentkezés</a></button>
+        <a href="/logout" class="btn btn-danger"  style="color:white">Kijelentkezés</a>
       <% } %>
     </div>
 </nav>

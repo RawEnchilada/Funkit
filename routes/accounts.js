@@ -1,5 +1,6 @@
 
 let login = require("./source/login");
+let register = require("./source/register");
 let logout = require("./source/logout");
 let checkSession = require("./source/checkSession");
 
@@ -13,8 +14,10 @@ module.exports = (app) => {
         res.send(res.locals.sessionType);
     });
 
-    app.post("/login.html/login",login);
+    app.post("/login/login",login);
 
-    app.post("/logout",logout);
+    app.post("/login/register",register);
+
+    app.use("/logout",logout);//does not call next
 
 }

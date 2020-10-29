@@ -7,7 +7,6 @@ module.exports = (req,res,next) => {
     save session id
     */
 
-
     console.log("\nUser trying to login with information: \nSession ID = "+req.session.id);
     console.log(req.body);
 

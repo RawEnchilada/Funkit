@@ -14,7 +14,7 @@ app.use(session({
         resave: false,
         saveUninitialized:true
     }),
-    //express.static('static'),
+    express.static('static'),
     parser
 );
 

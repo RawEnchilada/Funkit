@@ -1,7 +1,6 @@
 //remove user's session id from database
 module.exports = (req, res, next) => {
 
-
     if (res.locals.sessionType != "guest") {
         console.log("\nUser trying to logout with Session ID = " + req.session.id);
 
@@ -26,6 +25,5 @@ module.exports = (req, res, next) => {
             });
         });
     }
-    //res.send(res.locals.sessionType);
-    next();
+    res.redirect("/"+res.locals.page);
 }
