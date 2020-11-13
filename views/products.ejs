@@ -15,6 +15,11 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <% 
+                                locals.table.forEach(element => {
+                                    
+                                });
+                        %> 
                         <tr>
                             <td><img src="sources/blocks.jpg" style="max-width: 80%"/></td>
                             <td style="vertical-align: middle;">Building Blocks</td>
@@ -28,6 +33,7 @@
                             <td style="vertical-align: middle;">2000001ft</td>
                         </tr>
                     </tbody>
+                    <%- include("productTable",{data: })
                 </table>
             </div>
         </div>
