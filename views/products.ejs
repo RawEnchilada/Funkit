@@ -15,25 +15,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% 
-                                locals.table.forEach(element => {
-                                    
-                                });
-                        %> 
-                        <tr>
-                            <td><img src="sources/blocks.jpg" style="max-width: 80%"/></td>
-                            <td style="vertical-align: middle;">Building Blocks</td>
-                            <td style="vertical-align: middle;">These are some very cool wooden blocks.</td>
-                            <td style="vertical-align: middle;">2000000ft</td>
-                        </tr>
-                        <tr>
-                            <td><img src="sources/tank.png" style="max-width: 80%"/></td>
-                            <td style="vertical-align: middle;">Pop Tanks</td>
-                            <td style="vertical-align: middle;">These are some very cool wooden tanks.</td>
-                            <td style="vertical-align: middle;">2000001ft</td>
-                        </tr>
+                        <% locals.table.forEach(element => { %>
+                            <tr>
+                                <td><img src="<%=element.image%>" style="max-width: 80%"/></td>
+                                <td style="vertical-align: middle;"><%=element.name%></td>
+                                <td style="vertical-align: middle;"><%=element.description%></td>
+                                <td style="vertical-align: middle;"><%=element.price%>ft</td>
+                            </tr>                                    
+                        <%     }); %>
                     </tbody>
-                    <%- include("productTable",{data: })
                 </table>
             </div>
         </div>

@@ -2,11 +2,19 @@
 
 module.exports = (app) =>{
 
-    app.get("/orders/:userid/",(req,res,next) =>{
-        //if userid is admin, return all orders
-        //else if userid is buyer return own orders
-        //else redirect to index
-        next();
+    app.get("/orders",(req,res,next) =>{
+        let coll = req.db.collection('orders');
+        res.locals.table = 0;
+        
+        coll.find({}).toArray((er,docs)=>{
+            res.locals.table = new Array(0);
+            docs.forEach((entry)=>{
+                if(res.locals.username == entry.user || res.locals.sessionType == "admin"){
+                    res.locals.table.push(entry);
+                }
+            });            
+            next();
+        });
     });
 
 }

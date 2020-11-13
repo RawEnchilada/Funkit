@@ -17,15 +17,17 @@
               <a class="nav-link" style="color:floralwhite; font-size: large; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" href="/products">Termékek</a>
             <% } %>
         </li>
-        <li class="nav-item">
-            <% if(selected == "orders"){ %>
-              <div style="background-color: floralwhite;">
-              <a class="nav-link active" style="color:rgb(179, 12, 101); font-size: large; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" href="/orders">Rendelések</a>
-              </div>
-            <% } else { %>
-              <a class="nav-link" style="color:floralwhite; font-size: large; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" href="/orders">Rendelések</a>
-            <% } %>
-        </li>
+        <% if(locals.sessionType != "guest"){%>
+          <li class="nav-item">
+              <% if(selected == "orders"){ %>
+                <div style="background-color: floralwhite;">
+                <a class="nav-link active" style="color:rgb(179, 12, 101); font-size: large; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" href="/orders">Rendelések</a>
+                </div>
+              <% } else { %>
+                <a class="nav-link" style="color:floralwhite; font-size: large; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" href="/orders">Rendelések</a>
+              <% } %>
+          </li>
+        <%}%>
       </ul>
       <% if(sessionType == "guest"){ %>
         <a href="/login" class="btn btn-success" style="color:white">Bejelentkezés</a>      

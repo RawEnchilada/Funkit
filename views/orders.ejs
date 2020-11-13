@@ -18,16 +18,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td style="vertical-align: middle;">Lakatos Pistike</td>
-                            <td style="vertical-align: middle;">lakat.OS@email.com</td>
-                            <td style="vertical-align: middle;">4200 City Generic Street 2.</td>
-                            <td style="vertical-align: middle;">2x Building Blocks</td>
-                            <td style="vertical-align: middle;">4000000ft</td>
-                            <td style="vertical-align: middle;">
-                                <button class="btn-outline-danger">X</button>
-                            </td>
-                        </tr>
+                        <% locals.table.forEach(element => { %>
+                            <tr>
+                                <td style="vertical-align: middle;"><%=element.name%></td>
+                                <td style="vertical-align: middle;"><%=element.email%></td>
+                                <td style="vertical-align: middle;"><%=element.address%></td>
+                                <td style="vertical-align: middle;"><%=element.amount%></td>
+                                <td style="vertical-align: middle;"><%=element.price%>ft</td>
+                                <td style="vertical-align: middle;">
+                                    <button class="btn-outline-danger">X</button>
+                                </td>
+                            </tr>                                    
+                        <%     }); %>
                     </tbody>
                 </table>
             </div>

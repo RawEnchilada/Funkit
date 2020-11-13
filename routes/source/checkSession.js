@@ -15,6 +15,7 @@ module.exports = (req,res,next) =>{
             if(entry.sessionid == req.session.id){
                 console.log(Date.now()+"     actual value: "+entry.account+"\n");
                 type = entry.account;
+                res.locals.username = entry.username;
             }
         });
         res.locals.sessionType = type;
