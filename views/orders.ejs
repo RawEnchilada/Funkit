@@ -1,14 +1,15 @@
 <%- include("header",{title: "Rendelések"}) %>
 <body style="background-color: gainsboro;">
-    <%- include("navbar",{selected: "orders"}) %>
-    
-    
+    <%- include("navbar",{selected: "orders"}) %>    
     <div class="container-fluid" style="padding-top: 100px;">
         <div class="row justify-content-center">
             <div class="col-sm-9">
                 <table class="table" style="background-color: white;">
                     <thead>
                         <tr>
+                            <% if(locals.sessionType == "admin"){ %>
+                                <th scope="col" style="text-align: center;">Felhasználó</th>
+                            <% } %>
                             <th scope="col" style="text-align: center;">Név</th>
                             <th scope="col" style="text-align: center;">Email</th>
                             <th scope="col" style="text-align: center;">Cím</th>
@@ -20,14 +21,20 @@
                     <tbody>
                         <% locals.table.forEach(element => { %>
                             <tr>
-                                <td style="vertical-align: middle;"><%=element.name%></td>
-                                <td style="vertical-align: middle;"><%=element.email%></td>
-                                <td style="vertical-align: middle;"><%=element.address%></td>
-                                <td style="vertical-align: middle;"><%=element.amount%></td>
-                                <td style="vertical-align: middle;"><%=element.price%>ft</td>
-                                <td style="vertical-align: middle;">
-                                    <button class="btn-outline-danger">X</button>
-                                </td>
+                                <% if(locals.sessionType == "admin"){ %>
+                                    <td style="vertical-align: middle; text-align: center;"><%=element.user%></td>
+                                <% } %>
+                                <td style="vertical-align: middle; text-align: center;"><%=element.product%></td>
+                                <td style="vertical-align: middle; text-align: center;"><%=element.name%></td>
+                                <td style="vertical-align: middle; text-align: center;"><%=element.email%></td>
+                                <td style="vertical-align: middle; text-align: center;"><%=element.address%></td>
+                                <td style="vertical-align: middle; text-align: center;"><%=element.amount%></td>
+                                <td style="vertical-align: middle; text-align: center;"><%=element.price%>ft</td>
+                                <% if(locals.sessionType == "admin"){ %>
+                                    <td style="vertical-align: middle; text-align: center;">
+                                        <button onclick="return deleteOrder('<%=element._id%>')" class="btn-outline-danger">X</button>
+                                    </td>
+                                <%}%>
                             </tr>                                    
                         <%     }); %>
                     </tbody>
@@ -35,4 +42,26 @@
             </div>
         </div>
     </div>
+    <% if(locals.sessionType == "admin"){ %>
+    <script>
+        function deleteOrder(id){
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "/deleteOrder", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function () {
+                if (this.readyState != 4) return;
+
+                if (this.status == 200) {
+                    data = this.responseText;
+                    console.log(data);                    
+                    window.location.href = "/orders";
+                }
+            };
+            xhr.send(JSON.stringify({
+                id: id
+            }));
+            return data;
+        }
+    </script>
+    <% } %>
 <%- include("footer") %>

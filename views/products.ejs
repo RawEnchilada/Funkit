@@ -8,19 +8,29 @@
                 <table class="table" style="background-color: white;">
                     <thead>
                         <tr>
-                            <th scope="col" style="min-width:30%;"></th>
+                            <th scope="col" style="min-width:30%;"><br></th>
                             <th scope="col" style="text-align: center;">Termék</th>
                             <th scope="col" style="text-align: center;">Leírás</th>
                             <th scope="col" style="text-align: center;">Ár</th>
+                            <th scope="col" style="text-align: center;"><br></th>
                         </tr>
                     </thead>
                     <tbody>
                         <% locals.table.forEach(element => { %>
                             <tr>
                                 <td><img src="<%=element.image%>" style="max-width: 80%"/></td>
-                                <td style="vertical-align: middle;"><%=element.name%></td>
-                                <td style="vertical-align: middle;"><%=element.description%></td>
-                                <td style="vertical-align: middle;"><%=element.price%>ft</td>
+                                <td style="vertical-align: middle; text-align: center;"><%=element.name%></td>
+                                <td style="vertical-align: middle; text-align: center;"><%=element.description%></td>
+                                <td style="vertical-align: middle; text-align: center;"><%=element.price%>ft</td>
+                                <% if(locals.sessionType != "guest"){%>
+                                    <td style="vertical-align: middle; text-align: center;">
+                                        <a href="/order" class="btn-outline-success">Order</a>
+                                    </td>
+                                <%} else {%>
+                                    <td style="vertical-align: middle; text-align: center;">
+                                        <a href="/login" class="btn-outline-success">Order</a>
+                                    </td>
+                                <% } %>
                             </tr>                                    
                         <%     }); %>
                     </tbody>

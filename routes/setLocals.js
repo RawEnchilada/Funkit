@@ -15,5 +15,9 @@ module.exports = (app)=>{
         res.locals.page = "login";
         next();
     });
+    app.use("/order", (req,res,next)=>{
+        res.locals.page = "order";
+        next();
+    });
 
 }
