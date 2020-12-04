@@ -2,7 +2,6 @@
 module.exports = (req, res, next) => {
 
     if (res.locals.sessionType != "guest") {
-        console.log("\nUser trying to logout with Session ID = " + req.session.id);
 
         let coll = req.db.collection('users');
 
@@ -18,9 +17,8 @@ module.exports = (req, res, next) => {
                             "sessionid": "none"
                         }
                     },
-                        (eerr, result) => {
-
-                        });
+                    (eerr, result) => {
+                    });
                 }
             });
         });

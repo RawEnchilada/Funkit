@@ -19,8 +19,9 @@ module.exports = (req,res,next) => {
                     "sessionid":req.session.id
                 });
             }
+            next();
         });
     }
-
-    next();
+    else next();
+    
 }

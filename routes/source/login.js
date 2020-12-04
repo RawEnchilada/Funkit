@@ -7,8 +7,6 @@ module.exports = (req,res,next) => {
     save session id
     */
 
-    console.log("\nUser trying to login with information: \nSession ID = "+req.session.id);
-    console.log(req.body);
 
    if(res.locals.sessionType == "guest"){
        
@@ -25,12 +23,12 @@ module.exports = (req,res,next) => {
                         "sessionid":req.session.id
                     }},
                     (eerr,result)=>{
-                        console.log(eerr);
+                        next();
                     });
                 }
             });
         });
                 
    }
-   next();
+   else next();
 }
