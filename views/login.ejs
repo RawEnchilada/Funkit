@@ -50,23 +50,26 @@
             
         }
         function register(){
-            let xhr = new XMLHttpRequest();
-            xhr.open("POST", "login/register", true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.onreadystatechange = function () {
-                if (this.readyState != 4) return;
+            if(document.getElementById("username").value != null &&
+            document.getElementById("password").value != null){
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "login/register", true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.onreadystatechange = function () {
+                    if (this.readyState != 4) return;
 
-                if (this.status == 200) {
-                    data = this.responseText;
-                    console.log(data);                    
-                    window.location.href = "/home";
-                }
-            };
-            xhr.send(JSON.stringify({
-                username: document.getElementById("username").value,
-                password: document.getElementById("password").value
-            }));
-            return data;
+                    if (this.status == 200) {
+                        data = this.responseText;
+                        console.log(data);                    
+                        window.location.href = "/home";
+                    }
+                };
+                xhr.send(JSON.stringify({
+                    username: document.getElementById("username").value,
+                    password: document.getElementById("password").value
+                }));
+                return data;
+            }
         }
     </script>
 <%- include("footer") %>

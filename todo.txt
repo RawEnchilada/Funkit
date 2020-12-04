@@ -1,4 +1,0 @@
-get products,
-get all orders,
-get orders of user,
-create order

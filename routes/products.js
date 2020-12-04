@@ -1,4 +1,7 @@
 
+let dProd = require("./source/deleteProduct")
+let aProd = require("./source/createProduct")
+
 module.exports = (app) =>{
 
     app.get("/products",(req,res,next) =>{
@@ -16,5 +19,8 @@ module.exports = (app) =>{
             next();
         });
     });
+
+    app.post("/deleteProduct",dProd);
+    app.post("/createProduct",aProd);
 
 }

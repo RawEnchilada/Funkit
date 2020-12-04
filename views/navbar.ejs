@@ -28,6 +28,17 @@
               <% } %>
           </li>
         <%}%>
+        <% if(locals.sessionType == "admin"){%>
+          <li class="nav-item">
+              <% if(selected == "product"){ %>
+                <div style="background-color: floralwhite;">
+                <a class="nav-link active" style="color:rgb(179, 12, 101); font-size: large; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" href="/addproduct">Új Termék</a>
+                </div>
+              <% } else { %>
+                <a class="nav-link" style="color:floralwhite; font-size: large; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" href="/addproduct">Új Termék</a>
+              <% } %>
+          </li>
+        <%}%>
       </ul>
       <% if(sessionType == "guest"){ %>
         <a href="/login" class="btn btn-success" style="color:white">Bejelentkezés</a>      

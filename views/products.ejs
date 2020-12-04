@@ -13,6 +13,9 @@
                             <th scope="col" style="text-align: center;">Leírás</th>
                             <th scope="col" style="text-align: center;">Ár</th>
                             <th scope="col" style="text-align: center;"><br></th>
+                            <% if(locals.sessionType == "admin"){%>
+                                <th scope="col" style="text-align: center;"><br></th>                                
+                            <% } %>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,6 +34,11 @@
                                         <a href="/login" class="btn-outline-success">Order</a>
                                     </td>
                                 <% } %>
+                                <% if(locals.sessionType == "admin"){%>
+                                    <td style="vertical-align: middle; text-align: center;">
+                                        <button onclick="return deleteProduct('<%=element._id%>')" class="btn-outline-danger">Törlés</button>
+                                    </td>
+                                <% } %>
                             </tr>                                    
                         <%     }); %>
                     </tbody>
@@ -38,4 +46,27 @@
             </div>
         </div>
     </div>
+    
+    <% if(locals.sessionType == "admin"){ %>
+        <script>
+            function deleteProduct(id){
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "/deleteProduct", true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.onreadystatechange = function () {
+                    if (this.readyState != 4) return;
+    
+                    if (this.status == 200) {
+                        data = this.responseText;
+                        console.log(data);                    
+                        window.location.href = "/products";
+                    }
+                };
+                xhr.send(JSON.stringify({
+                    id: id
+                }));
+                return data;
+            }
+        </script>
+    <% } %>
 <%- include("footer") %>

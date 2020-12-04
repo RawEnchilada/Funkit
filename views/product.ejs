@@ -1,0 +1,57 @@
+<%- include("header", {title:"Funkit - Új Termék"}) %>
+<body style="background-color: gainsboro;">
+    <%- include("navbar",{selected: "product"}) %>
+    <div class="container-fluid" style="width:40%;margin-top:5%;padding-top:20px; padding-bottom: 20px; border-radius: 15px; background-color:lightgray">
+        <div class="row justify-content-center">
+            <div class="col-sm-10" >
+                <form>
+                    <div class="form-group">
+                        <label for="image">Kép elérési útvonala</label>
+                        <input type="text" class="form-control" id="image"">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Név</label>
+                        <input type="text" class="form-control" id="name"">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Leírás</label>
+                        <input type="text" class="form-control" id="description"">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Ár</label>
+                        <input type="number" class="form-control" id="price"">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row justify-content-start" style="width:75%">
+            <div class="col-sm-2"> </div>
+            <div class="col-sm-auto" >
+                <button onclick="return postProduct()" type="button" class="btn btn-success">Hozzáad</button>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        function postProduct(){
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "/createProduct", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function () {
+                if (this.readyState != 4) return;
+
+                if (this.status == 200) {
+                    data = this.responseText;
+                    console.log(data);                    
+                    window.location.href = "/products";
+                }
+            };
+            xhr.send(JSON.stringify({
+                image:document.getElementById("image").value,
+                name:document.getElementById("name").value,
+                description:document.getElementById("description").value,
+                price:document.getElementById("price").value
+            }));
+        }
+    </script>
+<%- include("footer") %>
