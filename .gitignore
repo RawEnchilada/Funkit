@@ -3,3 +3,4 @@ package-lock.json
 .vscode/*
 db
 test.js
+.nyc_output
