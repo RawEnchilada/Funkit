@@ -7,7 +7,7 @@ module.exports = (req,res,next) => {
        
         let coll = req.db.collection('products');        
         
-        coll.deleteOne({"_id": ObjectId(req.body.id)});
+        coll.deleteOne({"_id": ObjectId(req.body.id)}).then(next);
    }
-   next();
+   else next();
 }

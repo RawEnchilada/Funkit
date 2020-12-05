@@ -1,3 +1,5 @@
+const { should } = require('chai');
+
 let expect = require('chai').expect;
 let MongoClient = require('mongodb').MongoClient;
 let url = "mongodb://localhost:27017/test";
@@ -336,6 +338,150 @@ describe('Tests',() =>{
 //|---------------------------------------|
 //|               products                |
 //|---------------------------------------|
+
+// Product tests without any race conditions, yay ✓
+
+    describe("Products",()=>{
+
+        let deleteProduct = require("../routes/source/deleteProduct")
+        let addProduct = require("../routes/source/createProduct")
+
+        before((done)=>{
+            connect.then(()=>{
+                let req ={
+                    db:null
+                }
+                req.db = client.db('test');
+                req.db.collection("products").insertOne({
+                    "name":"item",
+                    "description":"test",
+                    "price":10
+                }).then(()=>{done();});
+            });
+        });
+
+        it("SanityTest",(done)=>{
+           let req ={
+               db:null
+           } 
+           req.db = client.db('test');
+           req.db.collection("products").find({"name":"item"}).toArray((err,products)=>{
+               let result = products.find((element)=>{return element.description == "test"});
+               expect(result.price).equals(10);
+               done();
+           })
+        });
+
+
+        it("AddingProduct",(done)=>{
+            let req = {
+                db:null,
+                body:{
+                    image:"path",
+                    name:"name",
+                    description:"description",
+                    price:20
+                }
+            }
+            let res={
+                locals:{
+                    sessionType: "admin"
+                }
+            }
+            req.db = client.db('test');
+            addProduct(req,res,()=>{
+                req.db.collection("products").find({"name":"name"}).toArray((err,products)=>{
+                    let result = products.find((element)=>{return element.description == "description"});
+                    expect(result.price).equals(20);
+                    done();
+                });
+            });
+        });
+
+        it("RemoveProduct",(done)=>{
+            let req = {
+                db:null,
+                body:{
+                    image:"path",
+                    name:"todelete",
+                    description:"new",
+                    price:30
+                }
+            }
+            let res={
+                locals:{
+                    sessionType: "admin"
+                }
+            }
+            req.db = client.db('test');
+            addProduct(req,res,()=>{
+                req.db.collection("products").find({"name":"todelete"}).toArray((err,products)=>{
+                    req.body.id = products[0]._id;
+                    deleteProduct(req,res,()=>{
+                        req.db.collection("products").find({"description":"new"}).toArray((err,shouldbedeleted)=>{
+                            expect(shouldbedeleted.length).equals(0);
+                            done();
+                        });
+                    });
+                });
+            });
+        });
+
+        it("NonAdminRemoveProduct",(done)=>{
+            let req = {
+                db:null,
+                body:{
+                    image:"path",
+                    name:"third",
+                    description:"yes",
+                    price:40
+                }
+            }
+            let res={
+                locals:{
+                    sessionType: "admin"
+                }
+            }
+            req.db = client.db('test');
+            addProduct(req,res,()=>{
+                req.db.collection("products").find({"name":"third"}).toArray((err,products)=>{
+                    req.body.id = products[0]._id;
+                    res.locals.sessionType = "user";
+                    deleteProduct(req,res,()=>{
+                        req.db.collection("products").find({"description":"yes"}).toArray((err,remains)=>{
+                            expect(remains[0].price).equals(40);
+                            done();
+                        });
+                    });
+                });
+            });
+        });
+
+        it("NonAdminAddingProduct",(done)=>{
+            let req = {
+                db:null,
+                body:{
+                    image:"path",
+                    name:"fourth",
+                    description:"still",
+                    price:20
+                }
+            }
+            let res={
+                locals:{
+                    sessionType: "user"
+                }
+            }
+            req.db = client.db('test');
+            addProduct(req,res,()=>{
+                req.db.collection("products").find({"name":"fourth"}).toArray((err,products)=>{
+                    expect(products.length).equals(0);
+                    done();
+                });
+            });
+        });
+
+    });
 
 
 

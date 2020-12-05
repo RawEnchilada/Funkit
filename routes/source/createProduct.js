@@ -10,8 +10,8 @@ module.exports = (req,res,next) => {
             "name":req.body.name,
             "description":req.body.description,
             "price":req.body.price
-        });       
+        }).then(next);     
                 
    }
-   next();
+   else next();
 }
