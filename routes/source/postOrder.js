@@ -21,8 +21,9 @@ module.exports = (req,res,next) => {
                     });
                 }
             });
+            next();
         });       
                 
    }
-   next();
+   else next();
 }

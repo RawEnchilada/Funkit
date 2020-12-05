@@ -1,8 +1,8 @@
 module.exports = (req,res,next) => {
     let coll = req.db.collection('users');
 
-    if(req.body.username != null && req.body.password != null){   
-        coll.count().then((count)=>{
+    if(req.body.username != "" && req.body.password != ""){   
+        coll.countDocuments().then((count)=>{
             if(count === 0){
                 coll.insertOne({
                     "username":req.body.username,
